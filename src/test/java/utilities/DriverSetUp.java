@@ -1,5 +1,8 @@
 package utilities;
 
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -8,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class DriverSetUp {
-    private static String browserName = System.getProperty("browser","Chrome"); // console a user driver select kore dibe. , select na korle by default chrome browser open hobe
 
     private static final ThreadLocal<WebDriver> LOCAL_DRIVER = new ThreadLocal(); // localDriver nam a akta variable nilam
     // localDriver k set korar jonno method likhte hobe , and get korar jonno akta method likhte hobe
@@ -36,14 +38,23 @@ public class DriverSetUp {
         }
     }
 
-    public static synchronized void setBrowser() {
+    public static synchronized void setBrowser(String browserName) {
         WebDriver webDriver = getBrowser(browserName);
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         webDriver.manage().window().maximize();
         setDriver(webDriver);
     }
 
-    public static synchronized void quitBrowser() {
+    public static synchronized void quitBrowser(Scenario scenario) {
+        takeScreenShot(scenario);
         getDriver().quit();
+    }
+
+    public static void takeScreenShot(Scenario scenario){
+        if (scenario.isFailed()){
+            String screenShoteName = scenario.getName().replaceAll(" ","_");
+            byte[] sourcePath = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath,"image/png",screenShoteName);
+        }
     }
 }
