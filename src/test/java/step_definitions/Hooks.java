@@ -12,6 +12,7 @@ public class Hooks {
     public void launchBrowser(){
         DriverSetUp.setBrowser(browserName);
     }
+
     @After
     public void quitBrowsers(Scenario scenario){
         DriverSetUp.quitBrowser(scenario);
