@@ -1,4 +1,4 @@
 $(document).ready(function() {
-CucumberHTML.timelineItems.pushArray([{"id":"396199a5-2f4d-4291-9b2f-704652a0701a","feature":"Guess the word","scenario":"Maker starts a game","start":1677818201534,"group":1,"content":"","tags":"","end":1677818207080,"className":"passed"}]);
-CucumberHTML.timelineGroups.pushArray([{"id":1,"content":"Thread[main,5,main]"}]);
+CucumberHTML.timelineItems.pushArray([{"id":"57f8a1bf-b02b-49f3-b1a5-68f19298a5d4","feature":"Login feature","scenario":"User can't be logging using invalid password","start":1677848551940,"group":16,"content":"","tags":"@sanity,","end":1677848713037,"className":"passed"}]);
+CucumberHTML.timelineGroups.pushArray([{"id":16,"content":"Thread[TestNG-PoolService-0,5,main]"}]);
 });
